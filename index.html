@@ -19,93 +19,289 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Дополнительные стили для модального окна, чтобы не менять style.css */
-    .disclaimer-overlay {
+    /* ============================================================
+       IMPORTANT NOTICE — стили окна уведомления
+       Наследуют палитру и шрифты style.css
+       ============================================================ */
+    .notice-overlay {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
-      background: rgba(3, 7, 18, 0.88);
-      backdrop-filter: blur(6px);
+      padding: 1.25rem;
+      background: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
+      overflow-y: auto;
     }
-    .disclaimer-overlay.active {
+    .notice-overlay.active {
       opacity: 1;
       visibility: visible;
     }
-    .disclaimer-modal {
-      max-width: 640px;
+
+    .notice-window {
       width: 100%;
+      max-width: 620px;
       background: #0b1120;
       border: 3px solid #22d3ee;
-      box-shadow: 0 0 0 3px #030712, 0 0 0 6px #7c3aed, 0 0 30px rgba(34, 211, 238, 0.4);
-      padding: 2rem 1.75rem 1.75rem;
-      position: relative;
+      box-shadow:
+        0 0 0 3px #030712,
+        0 0 0 6px #7c3aed,
+        0 0 40px rgba(34, 211, 238, 0.35),
+        0 0 80px rgba(168, 85, 247, 0.25);
       image-rendering: pixelated;
+      font-family: 'VT323', monospace;
+      color: #cbd5e1;
+      margin: auto;
     }
-    .disclaimer-modal .section-kicker {
+
+    .notice-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 1rem;
+      background: #030712;
+      border-bottom: 2px solid #22d3ee;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: #22d3ee;
+      letter-spacing: 0.05em;
+    }
+    .notice-header .window-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .notice-header .window-dots i {
+      width: 10px;
+      height: 10px;
+      display: block;
+      background: #7c3aed;
+      box-shadow: 0 0 6px rgba(124, 58, 237, 0.8);
+    }
+    .notice-header .window-dots i:nth-child(1) { background: #f43f5e; box-shadow: 0 0 6px rgba(244, 63, 94, 0.8); }
+    .notice-header .window-dots i:nth-child(2) { background: #eab308; box-shadow: 0 0 6px rgba(234, 179, 8, 0.8); }
+    .notice-header .window-dots i:nth-child(3) { background: #22c55e; box-shadow: 0 0 6px rgba(34, 197, 94, 0.8); }
+    .notice-version {
+      margin-left: auto;
+      color: #a855f7;
+      font-size: 0.55rem;
+    }
+
+    .notice-content {
+      padding: 1.75rem 1.75rem 1.25rem;
+    }
+
+    .notice-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.4rem;
+      color: #030712;
+      background: #eab308;
+      border: 3px solid #030712;
+      box-shadow: 0 0 0 3px #eab308, 0 0 20px rgba(234, 179, 8, 0.5);
+      margin-bottom: 1.25rem;
+    }
+
+    .notice-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: #22d3ee;
+      letter-spacing: 0.08em;
       margin-bottom: 0.75rem;
     }
-    .disclaimer-modal h2 {
+    .notice-tag .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .notice-content h2 {
       font-family: 'Press Start 2P', monospace;
-      font-size: 0.9rem;
+      font-size: 1.15rem;
       line-height: 1.5;
       color: #e2e8f0;
-      margin: 0 0 1rem;
+      margin: 0 0 1.25rem;
       text-transform: uppercase;
     }
-    .disclaimer-modal p {
-      font-family: 'VT323', monospace;
+    .notice-content h2 .gradient-text {
+      background: linear-gradient(90deg, #22d3ee, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .notice-content > p {
       font-size: 1.25rem;
       line-height: 1.45;
       color: #94a3b8;
-      margin: 0 0 1rem;
+      margin: 0 0 1.25rem;
     }
-    .disclaimer-modal p strong {
+    .notice-content > p strong {
+      color: #e2e8f0;
+    }
+    .notice-content > p .cyan {
       color: #22d3ee;
     }
-    .disclaimer-modal .disclaimer-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.5rem;
-      font-family: 'VT323', monospace;
-      font-size: 1.2rem;
-      line-height: 1.5;
+
+    .notice-warning {
+      display: flex;
+      gap: 0.85rem;
+      padding: 1rem;
+      background: rgba(244, 63, 94, 0.08);
+      border: 2px solid #f43f5e;
+      margin-bottom: 1.25rem;
+    }
+    .notice-warning > span {
+      font-size: 1.5rem;
+      color: #f43f5e;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .notice-warning b {
+      display: block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: #f43f5e;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .notice-warning p {
+      font-size: 1.15rem;
+      line-height: 1.4;
       color: #cbd5e1;
+      margin: 0;
     }
-    .disclaimer-modal .disclaimer-list li {
-      padding-left: 1.4rem;
-      position: relative;
-      margin-bottom: 0.4rem;
+    .notice-warning a {
+      color: #22d3ee;
+      text-decoration: underline;
+      word-break: break-all;
     }
-    .disclaimer-modal .disclaimer-list li::before {
-      content: "▸";
-      position: absolute;
-      left: 0;
+    .notice-warning a:hover {
       color: #a855f7;
     }
-    .disclaimer-modal .disclaimer-actions {
+
+    .notice-limitations {
+      padding: 1rem;
+      background: rgba(124, 58, 237, 0.08);
+      border: 2px solid #7c3aed;
+      margin-bottom: 1.25rem;
+    }
+    .limitations-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: #a855f7;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.85rem;
+    }
+    .limitation-item {
       display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      padding: 0.45rem 0;
+      border-top: 1px dashed rgba(124, 58, 237, 0.35);
     }
-    .disclaimer-modal .pixel-button {
+    .limitation-item:first-of-type {
+      border-top: none;
+    }
+    .limitation-cross {
+      color: #f43f5e;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .limitation-status {
+      margin-left: auto;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid #f43f5e;
+      padding: 0.25rem 0.45rem;
+      letter-spacing: 0.05em;
+    }
+
+    .notice-footer-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: #64748b;
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .notice-confirm {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      color: #030712;
+      background: linear-gradient(90deg, #22d3ee, #a855f7);
+      border: 3px solid #030712;
+      box-shadow: 0 0 0 3px #22d3ee, 0 0 20px rgba(34, 211, 238, 0.4);
       cursor: pointer;
-      border: none;
-      font-family: inherit;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     }
+    .notice-confirm:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 0 0 0 3px #a855f7, 0 0 28px rgba(168, 85, 247, 0.6);
+      filter: brightness(1.1);
+    }
+    .notice-confirm:active {
+      transform: translate(0, 0);
+    }
+    .notice-confirm span {
+      font-size: 0.9rem;
+    }
+
+    .notice-bottom {
+      margin-top: 1rem;
+      text-align: center;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.45rem;
+      color: #475569;
+      letter-spacing: 0.08em;
+    }
+    .notice-bottom span {
+      color: #a855f7;
+      margin: 0 0.35rem;
+    }
+
     @media (max-width: 480px) {
-      .disclaimer-modal {
-        padding: 1.5rem 1.25rem 1.25rem;
+      .notice-content {
+        padding: 1.25rem 1.1rem 1rem;
       }
-      .disclaimer-modal h2 {
-        font-size: 0.75rem;
+      .notice-content h2 {
+        font-size: 0.9rem;
+      }
+      .notice-warning b,
+      .limitations-title {
+        font-size: 0.5rem;
+      }
+      .notice-confirm {
+        font-size: 0.55rem;
       }
     }
   </style>
@@ -115,21 +311,80 @@
   <div class="scanlines" aria-hidden="true"></div>
   <div class="ambient ambient-cyan"></div><div class="ambient ambient-purple"></div>
 
-  <!-- Модальное окно-дисклеймер при входе -->
-  <div class="disclaimer-overlay active" id="disclaimerOverlay" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle">
-    <div class="disclaimer-modal pixel-frame">
-      <div class="section-kicker">[ IMPORTANT — DISCLAIMER ]</div>
-      <h2 id="disclaimerTitle">Burmalda AI <span class="gradient-text">≠</span> burmalda-ai.com</h2>
-      <p>Этот ИИ <strong>не имеет никакого отношения</strong> к сторонней платформе <strong>https://burmalda-ai.com/</strong>.</p>
-      <ul class="disclaimer-list">
-        <li>Burmalda AI создана <strong>GG-Studio</strong> (основатель — <strong>Games Goшка</strong>).</li>
-        <li>ИИ <strong>не умеет генерировать фото или видео</strong>.</li>
-        <li>Проект работает только в Discord — найди пользователя <strong>burmaldaai</strong>.</li>
-      </ul>
-      <div class="disclaimer-actions">
-        <button class="pixel-button primary" id="disclaimerAccept">
-          <span>✓</span> ПОНЯТНО
+  <!-- BURMALDA AI OFFICIAL NOTICE -->
+  <div class="notice-overlay active" id="noticeOverlay" role="dialog" aria-modal="true" aria-labelledby="noticeTitle">
+    <div class="notice-window">
+      <div class="notice-header">
+        <div class="window-dots">
+          <i></i><i></i><i></i>
+        </div>
+        <span>IMPORTANT_NOTICE.EXE</span>
+        <span class="notice-version">GG-STUDIO</span>
+      </div>
+
+      <div class="notice-content">
+        <div class="notice-icon">!</div>
+
+        <div class="notice-tag">
+          <span class="status-dot"></span>
+          OFFICIAL PROJECT INFORMATION
+        </div>
+
+        <h2 id="noticeTitle">ВАЖНОЕ<br>
+          <span class="gradient-text">УВЕДОМЛЕНИЕ</span>
+        </h2>
+
+        <p>
+          <strong>Burmalda AI</strong> разработана студией
+          <strong class="cyan">GG-STUDIO</strong>.
+          Основатель проекта — <strong>Games Goшка</strong>.
+        </p>
+
+        <div class="notice-warning">
+          <span>⚠</span>
+          <div>
+            <b>НЕ СВЯЗАНО С ДРУГИМИ ПЛАТФОРМАМИ</b>
+            <p>
+              Этот проект не имеет никакого отношения к
+              <a href="https://burmalda-ai.com/"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                burmalda-ai.com
+              </a>
+              или её разработчикам.
+            </p>
+          </div>
+        </div>
+
+        <div class="notice-limitations">
+          <div class="limitations-title">
+            <span>⌘</span> ВОЗМОЖНОСТИ И ОГРАНИЧЕНИЯ
+          </div>
+
+          <div class="limitation-item">
+            <span class="limitation-cross">✕</span>
+            Генерация фотографий и изображений
+            <span class="limitation-status">НЕДОСТУПНО</span>
+          </div>
+
+          <div class="limitation-item">
+            <span class="limitation-cross">✕</span>
+            Генерация видео
+            <span class="limitation-status">НЕДОСТУПНО</span>
+          </div>
+        </div>
+
+        <div class="notice-footer-text">
+          BURMALDA AI — INDEPENDENT GG-STUDIO PROJECT
+        </div>
+
+        <button class="notice-confirm" id="noticeConfirm">
+          <span>✓</span> ПОНЯТНО, ПРОДОЛЖИТЬ
         </button>
+
+        <div class="notice-bottom">
+          BY GG-STUDIO <span>•</span> FOUNDER: GAMES GOSHKA
+        </div>
       </div>
     </div>
   </div>
@@ -238,32 +493,29 @@
       setTimeout(() => { label.textContent = 'КОПИРОВАТЬ НИК'; note.textContent = ''; }, 2200);
     });
 
-    // Управление модальным окном-дисклеймером
-    const overlay = document.getElementById('disclaimerOverlay');
-    const acceptBtn = document.getElementById('disclaimerAccept');
+    // ====== Управление окном IMPORTANT_NOTICE ======
+    const noticeOverlay = document.getElementById('noticeOverlay');
+    const noticeConfirm = document.getElementById('noticeConfirm');
 
-    function closeDisclaimer() {
-      overlay.classList.remove('active');
-      // Разблокируем скролл страницы, если он был заблокирован
+    function closeNotice() {
+      noticeOverlay.classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    // Блокируем скролл, пока открыто модальное окно
+    // Блокируем скролл, пока открыто уведомление
     document.body.style.overflow = 'hidden';
 
-    acceptBtn.addEventListener('click', closeDisclaimer);
+    noticeConfirm.addEventListener('click', closeNotice);
 
-    // Закрытие по клику вне модального окна (по желанию, можно убрать)
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeDisclaimer();
-      }
+    // Закрытие по клику вне окна
+    noticeOverlay.addEventListener('click', (e) => {
+      if (e.target === noticeOverlay) closeNotice();
     });
 
     // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('active')) {
-        closeDisclaimer();
+      if (e.key === 'Escape' && noticeOverlay.classList.contains('active')) {
+        closeNotice();
       }
     });
   </script>
