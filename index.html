@@ -1,13 +1,12 @@
 <!doctype html>
-<html lang="ru">
-<head>
+<html lang="ru"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#030712">
   <meta name="description" content="Burmalda AI — ИИ-помощник в Discord. Найди burmaldaai и начни общение.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://gamesgotg.github.io/burmaldaai/">
-  <meta name="google-site-verification" content="IIVYFqfifyJQ22UjW_4gPoAXq2U6HznHi54jOW4vav0" />
+  <meta name="google-site-verification" content="IIVYFqfifyJQ22UjW_4gPoAXq2U6HznHi54jOW4vav0">
   <meta property="og:title" content="Burmalda AI — ИИ в Discord">
   <meta property="og:description" content="Узнай больше о Burmalda AI и найди ИИ-помощника в Discord.">
   <meta property="og:url" content="https://gamesgotg.github.io/burmaldaai/">
@@ -15,23 +14,80 @@
   <meta property="og:image" content="https://gamesgotg.github.io/burmaldaai/logo.png">
   <title>Burmalda AI — ИИ в Discord</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <meta name="google-site-verification" content="IIVYFqfifyJQ22UjW_4gPoAXq2U6HznHi54jOW4vav0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-updated.css">
+<link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jaGF0Z3B0LmNvbS9iYWNrZW5kLWFwaS9lc3R1YXJ5L2NvbnRlbnQ_aWQ9ZmlsZV8wMDAwMDAwMGNhMjQ4MWY0OGU3YjFlNDUyMWUzYTViYiZmbj1pbmRleCUyODElMjkuaHRtbCZjZD1hdHRhY2htZW50JnRzPTQ5NzUyOSZwPWZzJmNpZD0xJnNpZz00YTU5NGQ5MTZlMDM1NGI2YWIyMzkxM2Y2ZmQ3MmFlZWEwOTc1MjdkYjgxMzZlOTJiYzkyMzMzYjNkNWRiYzI1JnY9MA"></head>
+<body class="">
+  <!-- Официальное уведомление проекта -->
+  <div class="notice-overlay hidden" id="noticeOverlay" role="dialog" aria-modal="true" aria-labelledby="noticeTitle" style="display: none;">
+    <div class="notice-window">
+      <div class="notice-header">
+        <div class="window-dots"><i></i><i></i><i></i></div>
+        <span>IMPORTANT_NOTICE.EXE</span>
+        <span class="notice-version">GG-STUDIO</span>
+      </div>
+
+      <div class="notice-content">
+        <div class="notice-icon">!</div>
+        <div class="notice-tag"><span class="status-dot"></span> OFFICIAL PROJECT INFORMATION</div>
+
+        <h2 id="noticeTitle">ВАЖНОЕ<br><span class="gradient-text">УВЕДОМЛЕНИЕ</span></h2>
+
+        <p>
+          <strong>Burmalda AI</strong> — самостоятельный проект,
+          разработанный студией <strong class="notice-cyan">GG-STUDIO</strong>.
+          Основатель студии — <strong class="notice-cyan">Games Goшка</strong>.
+        </p>
+
+        <div class="notice-warning">
+          <span class="notice-warning-icon">!</span>
+          <div>
+            <b>НЕ СВЯЗАНО СО СТОРОННЕЙ ПЛАТФОРМОЙ</b>
+            <p>
+              Этот проект не имеет отношения к
+              <a href="https://burmalda-ai.com/" target="_blank" rel="noopener noreferrer">burmalda-ai.com</a>
+              или её разработчикам.
+            </p>
+          </div>
+        </div>
+
+        <div class="notice-limitations">
+          <div class="limitations-title"><span>⌘</span> ВОЗМОЖНОСТИ И ОГРАНИЧЕНИЯ</div>
+          <div class="limitation-item">
+            <span class="limitation-cross">✕</span>
+            <span>Генерация фотографий и изображений</span>
+            <span class="limitation-status">НЕДОСТУПНО</span>
+          </div>
+          <div class="limitation-item">
+            <span class="limitation-cross">✕</span>
+            <span>Генерация видео</span>
+            <span class="limitation-status">НЕДОСТУПНО</span>
+          </div>
+        </div>
+
+        <div class="notice-footer-text">BURMALDA AI — INDEPENDENT GG-STUDIO PROJECT</div>
+        <button class="notice-confirm" id="noticeConfirm" type="button">
+          <span>✓</span> ПОНЯТНО, ПРОДОЛЖИТЬ
+        </button>
+        <div class="notice-bottom">BY GG-STUDIO <span>•</span> FOUNDER: GAMES GOSHKA</div>
+      </div>
+    </div>
+  </div>
+
   <div class="scanlines" aria-hidden="true"></div>
   <div class="ambient ambient-cyan"></div><div class="ambient ambient-purple"></div>
+
   <header class="topbar">
     <a class="brand" href="#home" aria-label="Burmalda AI — главная">
-      <span class="brand-mark"><img src="logo.png" alt="" /></span><span class="brand-name">BURMALDA<span class="accent">.AI</span></span>
+      <span class="brand-mark"><img src="logo.png" alt=""></span>
+      <span class="brand-name">BURMALDA<span class="accent">.AI</span></span>
     </a>
     <nav class="nav">
       <a href="#about">О ПРОЕКТЕ</a><a href="#features">ВОЗМОЖНОСТИ</a><a href="#start">НАЧАТЬ</a>
     </nav>
-    <a class="discord-small" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noreferrer"><span class="status-dot"></span> DISCORD</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">☰</button>
+    <a class="discord-small" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noopener noreferrer"><span class="status-dot"></span> DISCORD</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" type="button">☰</button>
   </header>
 
   <main id="home">
@@ -42,11 +98,12 @@
         <p class="hero-lead">Твой ИИ-собеседник прямо в Discord.</p>
         <p class="hero-text">Общайся, задавай вопросы и проверяй идеи вместе с Burmalda AI. Найди помощника по нику <strong>burmaldaai</strong>.</p>
         <div class="hero-actions">
-          <a class="pixel-button primary" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noreferrer"><span>↗</span> ОТКРЫТЬ DISCORD</a>
+          <a class="pixel-button primary" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noopener noreferrer"><span>↗</span> ОТКРЫТЬ DISCORD</a>
           <a class="pixel-button secondary" href="#about">УЗНАТЬ БОЛЬШЕ <span>↓</span></a>
         </div>
         <div class="hero-meta"><span class="mini-square"></span> ДОСТУПНА В DISCORD <span class="meta-divider">|</span> USER: <strong>burmaldaai</strong></div>
       </div>
+
       <div class="hero-art" aria-label="Пиксельная иллюстрация интерфейса Burmalda AI">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
         <div class="pixel-star star-one">✦</div><div class="pixel-star star-two">✧</div><div class="pixel-star star-three">+</div>
@@ -100,32 +157,71 @@
       <div class="start-panel">
         <div class="start-grid"></div>
         <div class="start-content"><div class="eyebrow"><span class="status-dot"></span> READY WHEN YOU ARE</div><h2>ЗАПУСТИ<br><span class="gradient-text">ДИАЛОГ.</span></h2><p>Открой Discord и найди <strong>burmaldaai</strong>. Всё начинается с одного сообщения.</p>
-          <a class="pixel-button primary large" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noreferrer"><span>↗</span> ПЕРЕЙТИ В DISCORD</a>
-          <button class="copy-user" id="copyUser"><span class="copy-symbol">▣</span> <span>burmaldaai</span><b id="copyLabel">КОПИРОВАТЬ НИК</b></button>
+          <a class="pixel-button primary large" href="https://discord.com/users/1317835636836663431" target="_blank" rel="noopener noreferrer"><span>↗</span> ПЕРЕЙТИ В DISCORD</a>
+          <button class="copy-user" id="copyUser" type="button"><span class="copy-symbol">▣</span> <span>burmaldaai</span><b id="copyLabel">КОПИРОВАТЬ НИК</b></button>
           <div class="copy-note" id="copyNote" aria-live="polite"></div>
         </div>
         <div class="start-decoration">B<br><span>AI</span></div>
       </div>
     </section>
   </main>
-  <footer class="footer wrap"><a class="brand footer-brand" href="#home"><span class="brand-mark"><img src="logo.png" alt="" /></span><span class="brand-name">BURMALDA<span class="accent">.AI</span></span></a><span>MADE FOR THE DIGITAL WORLD <b>© 2026</b></span><a href="#home" class="back-top">НАВЕРХ ↑</a></footer>
+
+  <footer class="footer wrap">
+    <a class="brand footer-brand" href="#home"><span class="brand-mark"><img src="logo.png" alt=""></span><span class="brand-name">BURMALDA<span class="accent">.AI</span></span></a>
+    <span>MADE FOR THE DIGITAL WORLD <b>© 2026</b></span>
+    <a href="#home" class="back-top">НАВЕРХ ↑</a>
+  </footer>
+
   <script>
     const toggle = document.getElementById('menuToggle');
     const nav = document.querySelector('.nav');
-    toggle.addEventListener('click', () => nav.classList.toggle('nav-open'));
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('nav-open')));
+
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
     document.getElementById('copyUser').addEventListener('click', async () => {
       const note = document.getElementById('copyNote');
       const label = document.getElementById('copyLabel');
+
       try {
         await navigator.clipboard.writeText('burmaldaai');
         label.textContent = 'СКОПИРОВАНО!';
         note.textContent = 'Ник burmaldaai скопирован.';
       } catch {
-        note.textContent = 'Ник для поиска: burmaldaai';
+        label.textContent = 'НИК: burmaldaai';
+        note.textContent = 'Скопируй ник вручную: burmaldaai';
       }
-      setTimeout(() => { label.textContent = 'КОПИРОВАТЬ НИК'; note.textContent = ''; }, 2200);
+
+      setTimeout(() => {
+        label.textContent = 'КОПИРОВАТЬ НИК';
+        note.textContent = '';
+      }, 2200);
     });
+
+    // Уведомление показывается при каждом новом открытии страницы.
+    const noticeOverlay = document.getElementById('noticeOverlay');
+    const noticeConfirm = document.getElementById('noticeConfirm');
+
+    noticeConfirm.addEventListener('click', () => {
+      noticeOverlay.classList.add('hidden');
+      document.body.classList.remove('notice-open');
+
+      window.setTimeout(() => {
+        noticeOverlay.style.display = 'none';
+      }, 350);
+    });
+
+    document.body.classList.add('notice-open');
   </script>
-</body>
-</html>
+
+
+</body></html>
